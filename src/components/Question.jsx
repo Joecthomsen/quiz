@@ -2,7 +2,7 @@ import React from 'react';
 
 function Question(props) {
 
-    var numbers = [0, 1, 2, 3];
+     var numbers = [0, 1, 2, 3];
 
     function shuffle(o) {
         for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -11,33 +11,29 @@ function Question(props) {
 
     var random = shuffle(numbers);
 
-    const answerList = {...props.wrongAnswer}
+    //[0].results[0].question
+    
 
-    let answerFullList = [answerList[0], answerList[1], answerList[2], props.rightAnswer]
+    const first = {...props}
+    const second = {...first.question}
+    const third = [second]
+    //if(third[0].length > 0){
+   // console.log(third[0].results)
+    //}
+    //console.log(props.results[0])
 
-    // function createFiveQuestions(){
-    //     var numbers = [0, 1, 2, 3];
-    //     function shuffle(o) {
-    //         for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    //         return o;
-    //     };
-    //     return(
 
-    //     )
-    // }
-
-    console.log(props.questions)
 
     return (
         <div className='question'>
-            <h1>{props.question}</h1>
+            <h1>question</h1>
             <div className='buttons'>
-                <button>{answerFullList[random[0]]}</button>
-                <button>{answerFullList[random[1]]}</button>
-                <button>{answerFullList[random[2]]}</button>
-                <button>{answerFullList[random[3]]}</button>
+                <button>bla</button>
+                <button>bla</button>
+                <button>bla</button>
+                <button>bla</button>            
             </div>
-            <hr className='ruler'/>
+            <hr className='ruler'/> 
         </div>
       );
 }
