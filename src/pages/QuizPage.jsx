@@ -1,32 +1,36 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Question from '../components/Question';
+//import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 function QuizPage() {
 
-    const [questions, setQuestions] = React.useState([])
-     
+    const [questionsList, setQuestionsList] = React.useState(null)
+    const [answerButton, setAnswerButton] = React.useState({
+        question: [],
+        rightAnswer: [],
+        wrongAnswer: []
+    })
 
     React.useEffect(() => {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
         .then((response) => response.json())
-        .then(data => {
-            setQuestions(data) 
-            console.log(data.results[2].question)
-            console.log(data)
+        .then(data => {setQuestionsList(data)
         })
     },[])
 
-    Object.keys(questions).length > 0 ? console.log("Good to go") : console.log("Empty")
-
     return (
         <div>
-            {Object.keys(questions).length > 0 ?
-             <Question 
-             question={questions.results[0].question}
-             rightAnswer={questions.results[0].correct_answer}
-             wrongAnswer={questions.results[0].incorrect_answers}
-           /> : <Question />}
+            {questionsList &&
+                <Question 
+                    // question={questionsList.results[0].question}
+                    // rightAnswer={questionsList.results[0].correct_answer}
+                    // wrongAnswer={questionsList.results[0].incorrect_answers}
+                    questions={questionsList.results}
+                    // rightAnswer={answerButton.rightAnswer[0]}
+                    // wrongAnswer={answerButton.wrongAnswer[0]}
+                /> 
+            }
             
             <Question />
             <Question />
