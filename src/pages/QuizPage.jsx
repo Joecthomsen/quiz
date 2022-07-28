@@ -23,7 +23,8 @@ function QuizPage() {
 
     return (
         <div>
-            {allQuestions.length > 0 && 
+            {allQuestions.length > 0 
+            ? 
                 <div>
                     <Question 
                         {...allQuestions[0]}
@@ -41,6 +42,8 @@ function QuizPage() {
                         {...allQuestions[4]}
                     />    
                 </div>
+            :
+                <h1>LOADING...</h1>
             }
         </div>
       );

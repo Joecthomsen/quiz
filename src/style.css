@@ -83,13 +83,13 @@ body{
     margin-top: 1rem;
 }
 
-/* .buttons > button{
+.buttons > button{
     padding: 0.5rem 1rem;
     background-color: white;
     border-color: #4d5b9e;
     border-radius: 0.7rem;
     color: #293263
-} */
+}
 
 .question > h1{
     margin: 1%;
