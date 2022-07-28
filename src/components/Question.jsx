@@ -1,8 +1,9 @@
 import React from 'react';
+import Button from './Button';
 
 function Question(props) {
 
-     var numbers = [0, 1, 2, 3];
+    var numbers = [0, 1, 2, 3];
 
     function shuffle(o) {
         for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -11,31 +12,36 @@ function Question(props) {
 
     var random = shuffle(numbers);
 
-    //[0].results[0].question
+    function handleButtonClick(event){
+        console.log(event)
+    }
+
+    const allAnswers = [...props.incorrect_answers, props.correct_answer]
+    const question = JSON.stringify(props.question).replace(/&#039;/g , '\'').replace(/"/g, '').replace(/&quot;/g , '"')
     
-
-    const first = {...props}
-    const second = {...first.question}
-    const third = [second]
-    //if(third[0].length > 0){
-   // console.log(third[0].results)
-    //}
-    //console.log(props.results[0])
-
-
+    // return (
+    //     <div className='question'>
+    //         <h1>{question}</h1>
+    //         <div className='buttons'>
+    //             <button onClick={handleButtonClick}>{allAnswers[random[0]]}</button>
+    //             <button onClick={handleButtonClick}>{allAnswers[random[1]]}</button>
+    //             <button>{allAnswers[random[2]]}</button>
+    //             <button>{allAnswers[random[3]]}</button>            
+    //         </div>
+    //         <hr className='ruler'/> 
+    //     </div>
+    //   );
 
     return (
         <div className='question'>
-            <h1>question</h1>
+            <h1>{question}</h1>
             <div className='buttons'>
-                <button>bla</button>
-                <button>bla</button>
-                <button>bla</button>
-                <button>bla</button>            
+                <Button />        
             </div>
             <hr className='ruler'/> 
         </div>
       );
+
 }
 
 export default Question;
