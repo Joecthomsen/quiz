@@ -6,7 +6,7 @@ function Button(props) {
         backgroundColor: props.on ? "blue" : "white"
     }
 
-    return (<button onClick={() => {props.handleClick(props.id)}} style={styles}>{props.answer}</button> );
+    return  (<button onClick={() => {props.handleClick(props.id)}} >{props.answer}</button> ); // (<button onClick={() => {props.handleClick(props.id)}}>{props.answer}</button> );
 }
 
 export default Button;

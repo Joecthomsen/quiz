@@ -61,10 +61,9 @@ import { nanoid } from 'nanoid'
 
 function Question(props) {
 
-    const [buttonState, setButtonState] = React.useState(buttons)
+    
 
     const allAnswers = [...props.incorrect_answers, props.correct_answer]
-    const question = JSON.stringify(props.question).replace(/&#039;/g , '\'').replace(/"/g, '').replace(/&quot;/g , '"')
 
     var numbers = [0, 1, 2, 3];
 
@@ -74,43 +73,37 @@ function Question(props) {
     };
 
     let random = []
-
-    let buttonElements = {}
-
-        random = shuffle(numbers)
-        console.log("executed")
-
-            buttonElements = buttons.map((button, index) => (
-            <Button 
-            key={index} 
-            on={button.on}
-            id={nanoid()} 
-            answer={allAnswers[random[index]]} 
-            handleClick={toggle}
-            />
-        ))
-
+    random = shuffle(numbers)
+    const shuffledAnswers = [allAnswers[random[0]], allAnswers[random[1]], allAnswers[random[2]], allAnswers[random[3]]]
     
+    const questionConverted = JSON.stringify(props.question).replace(/&#039;/g , '\'').replace(/"/g, '').replace(/&quot;/g , '"')
+
+    //console.log(props)
+
+    const [allButtons, setAllButtons] = React.useState({buttons})
+
     function toggle(id){
-        console.log("you clicked: " + id)
-        // console.log("you clicked: " + id)
-        // setButtonState((prevState) => {
-        //    return prevState.map(button => {
-        //     console.log(button)
-        //     return button.id === id ? {...button, on: !button.on} : button
-        //    })
-        // })
+        console.log("Click from id: " + id)
+        setBtnState((prevState) => {
+            return{...prevState.ids === id ? {...prevState, ids: id} : prevState}
+        })
     }
-        
 
-
-    
+    const [btnState, setBtnState] = React.useState({
+        ids: [nanoid(), nanoid(), nanoid(), nanoid(),],  
+        question: questionConverted,
+        correctAnswer: props.correctAnswer,
+        incorrectAnswers: [...props.incorrect_answers]  
+    })
 
     return (
         <div className='question'>
-            <h1>{question}</h1>
+            <h1>{questionConverted}</h1>
             {<div className='buttons'>
-                {buttonElements}
+                <Button answer={shuffledAnswers[0]} id={btnState.ids[0]} handleClick={toggle} />
+                <Button answer={shuffledAnswers[1]} id={btnState.ids[1]} handleClick={toggle} />
+                <Button answer={shuffledAnswers[2]} id={btnState.ids[2]} handleClick={toggle} />
+                <Button answer={shuffledAnswers[3]} id={btnState.ids[3]} handleClick={toggle} />
             </div>}
             <hr className='ruler'/> 
         </div>

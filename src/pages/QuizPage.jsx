@@ -21,6 +21,10 @@ function QuizPage() {
         }
     }
 
+    if(allQuestions.length > 0){
+    // console.log(allQuestions[0])
+    }
+
     return (
         <div>
             {allQuestions.length > 0 
@@ -29,10 +33,10 @@ function QuizPage() {
                     <Question 
                         {...allQuestions[0]}
                     />    
-                    <Question 
+                    {/* <Question 
                         {...allQuestions[1]}
-                    />    
-                    <Question 
+                    />     */}
+                    {/* <Question 
                         {...allQuestions[2]}
                     />    
                     <Question 
@@ -40,7 +44,7 @@ function QuizPage() {
                     />    
                     <Question 
                         {...allQuestions[4]}
-                    />    
+                    />     */}
                 </div>
             :
                 <h1>LOADING...</h1>
