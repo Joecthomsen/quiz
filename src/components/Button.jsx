@@ -3,10 +3,13 @@ import React from "react";
 function Button(props) {
 
     const styles = {
-        backgroundColor: props.on ? "blue" : "white"
+        backgroundColor: props.toggled ? "blue" : "white"
     }
 
-    return  (<button onClick={() => {props.handleClick(props.id)}} >{props.answer}</button> ); // (<button onClick={() => {props.handleClick(props.id)}}>{props.answer}</button> );
+    console.log(props.toggled)
+
+
+    return  (<button onClick={() => {props.handleClick(props.id)}} style={styles}>{props.answer}</button> ); // (<button onClick={() => {props.handleClick(props.id)}}>{props.answer}</button> );
 }
 
 export default Button;

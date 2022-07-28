@@ -55,47 +55,66 @@
 //         },
 //     ], 
 // ]
+
+    //     ids: [nanoid(), nanoid(), nanoid(), nanoid(),],  
+    //     question: questionConverted,
+    //     correctAnswer: props.correctAnswer,
+    //     incorrectAnswers: [...props.incorrect_answers],  
+    //     toggled: false
+import { nanoid } from 'nanoid'
 export default 
 [
       
         {
-            id: 0,
-            on: false
+            id: nanoid(),
+            question: "",
+            correctAnswer: "",
+            incorrectAnswers: [],
+            toggled: false
         },   
         {
-            id: 1,
-            on: false
+            id: nanoid(),
+            question: "",
+            correctAnswer: "",
+            incorrectAnswers: [],
+            toggled: false
         },   
         {
-            id: 2,
-            on: false
+            id: nanoid(),
+            question: "",
+            correctAnswer: "",
+            incorrectAnswers: [],
+            toggled: false
         },   
         {
-            id: 3,
-            on: false
+            id: nanoid(),
+            question: "",
+            correctAnswer: "",
+            incorrectAnswers: [],
+            toggled: false
         },
    
-        {
-            id: 4,
-            on: false
-        },   
-        {
-            id: 5,
-            on: false
-        },   
-        {
-            id: 6,
-            on: false
-        },   
-        {
-            id: 7,
-            on: false
-        },
+        // {
+        //     id: 4,
+        //     on: false
+        // },   
+        // {
+        //     id: 5,
+        //     on: false
+        // },   
+        // {
+        //     id: 6,
+        //     on: false
+        // },   
+        // {
+        //     id: 7,
+        //     on: false
+        // },
   
-        {
-            id: 8,
-            on: false
-        },   
+        // {
+        //     id: 8,
+        //     on: false
+        // },   
         // {
         //     id: 9,
         //     on: false

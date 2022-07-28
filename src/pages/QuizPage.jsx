@@ -33,9 +33,9 @@ function QuizPage() {
                     <Question 
                         {...allQuestions[0]}
                     />    
-                    {/* <Question 
+                    <Question 
                         {...allQuestions[1]}
-                    />     */}
+                    />    
                     {/* <Question 
                         {...allQuestions[2]}
                     />    

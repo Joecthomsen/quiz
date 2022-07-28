@@ -80,30 +80,43 @@ function Question(props) {
 
     //console.log(props)
 
-    const [allButtons, setAllButtons] = React.useState({buttons})
+    const [allButtons, setAllButtons] = React.useState([buttons])
 
     function toggle(id){
         console.log("Click from id: " + id)
-        setBtnState((prevState) => {
-            return{...prevState.ids === id ? {...prevState, ids: id} : prevState}
-        })
+        // setBtnState((prevState) => {
+        //     return{...prevState.ids === id ? {...prevState, toogled: !prevState.toggled} : prevState}
+        // })
     }
 
-    const [btnState, setBtnState] = React.useState({
-        ids: [nanoid(), nanoid(), nanoid(), nanoid(),],  
-        question: questionConverted,
-        correctAnswer: props.correctAnswer,
-        incorrectAnswers: [...props.incorrect_answers]  
-    })
+    // const [btnState, setBtnState] = React.useState({
+    //     ids: [nanoid(), nanoid(), nanoid(), nanoid(),],  
+    //     question: questionConverted,
+    //     correctAnswer: props.correctAnswer,
+    //     incorrectAnswers: [...props.incorrect_answers],  
+    //     toggled: false
+    // })
+
+
+    const [btnState, setBtnState] = React.useState(
+        buttons.map((element, index) => {
+            return (
+                <Button key={nanoid()} answer={shuffledAnswers[index]} id={element.id} handleClick={toggle} toggled={element.toggled}/>
+            )
+        })
+    )
+
+    console.log(allButtons)
 
     return (
         <div className='question'>
             <h1>{questionConverted}</h1>
             {<div className='buttons'>
-                <Button answer={shuffledAnswers[0]} id={btnState.ids[0]} handleClick={toggle} />
-                <Button answer={shuffledAnswers[1]} id={btnState.ids[1]} handleClick={toggle} />
-                <Button answer={shuffledAnswers[2]} id={btnState.ids[2]} handleClick={toggle} />
-                <Button answer={shuffledAnswers[3]} id={btnState.ids[3]} handleClick={toggle} />
+                {btnState}
+                {/* <Button answer={shuffledAnswers[0]} id={btnState.ids[0]} handleClick={toggle} toggled={btnState.toggled}/>
+                <Button answer={shuffledAnswers[1]} id={btnState.ids[1]} handleClick={toggle} toggled={btnState.toggled}/>
+                <Button answer={shuffledAnswers[2]} id={btnState.ids[2]} handleClick={toggle} toggled={btnState.toggled}/>
+                <Button answer={shuffledAnswers[3]} id={btnState.ids[3]} handleClick={toggle} toggled={btnState.toggled}/> */}
             </div>}
             <hr className='ruler'/> 
         </div>
