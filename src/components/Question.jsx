@@ -82,20 +82,20 @@ function Question(props) {
 
     const [allButtons, setAllButtons] = React.useState([buttons])
 
-    function toggle(id){
-        console.log("Click from id: " + id)
+    function toggle(event){
+        console.log("Click from id: " + event.target.id)
         // setBtnState((prevState) => {
         //     return{...prevState.ids === id ? {...prevState, toogled: !prevState.toggled} : prevState}
         // })
     }
 
-    // const [btnState, setBtnState] = React.useState({
-    //     ids: [nanoid(), nanoid(), nanoid(), nanoid(),],  
-    //     question: questionConverted,
-    //     correctAnswer: props.correctAnswer,
-    //     incorrectAnswers: [...props.incorrect_answers],  
-    //     toggled: false
-    // })
+//     const [btnState, setBtnState] = React.useState({
+//         ids: "dette er mit id" + nanoid(),  
+//         question: questionConverted,
+//         correctAnswer: props.correctAnswer,
+//         incorrectAnswers: [...props.incorrect_answers],  
+//         toggled: false
+// })
 
 
     const [btnState, setBtnState] = React.useState(
@@ -106,7 +106,7 @@ function Question(props) {
         })
     )
 
-    console.log(allButtons)
+    //console.log(allButtons)
 
     return (
         <div className='question'>

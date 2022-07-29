@@ -1,28 +1,34 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Question from '../components/Question';
+import Questions from '../components/Questions';
 //import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 function QuizPage() {
 
     const [allQuestions, setAllQuestions] = React.useState([])
 
+    //const [questions, setQuestions] = allQuestions ? React.useState(createNewList()) : React.useState([])
+
     React.useEffect(() => {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
         .then((response) => response.json())
         .then(data => { setAllQuestions(data.results) })
+
     },[])
 
-    const getQuestion = (uniqeRandomNumber) => {
-        return{
-            question: allQuestions[uniqeRandomNumber].question,
-            correctAnswer: allQuestions[uniqeRandomNumber].correct_answer,
-            incorrectAnswer: allQuestions[uniqeRandomNumber].incorrect_answers,
-        }
-    }
 
-    if(allQuestions.length > 0){
-    // console.log(allQuestions[0])
+    function createNewList(){
+        const myList = []
+        for (let i = 0 ; i < 5 ; i++){
+            myList.push({
+                question: allQuestions[i].question,
+                correctAnswer: allQuestions[i].correct_answer,
+                incorrectAnswer: allQuestions[i].incorrect_answers,
+                toggled: false
+            })
+        }
+        return myList
     }
 
     return (
@@ -30,12 +36,13 @@ function QuizPage() {
             {allQuestions.length > 0 
             ? 
                 <div>
-                    <Question 
+                    <Questions questions={allQuestions}/>
+                    {/* <Question 
                         {...allQuestions[0]}
                     />    
                     <Question 
                         {...allQuestions[1]}
-                    />    
+                    />     */}
                     {/* <Question 
                         {...allQuestions[2]}
                     />    
