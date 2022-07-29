@@ -1,4 +1,5 @@
 import React from 'react';
+import { nanoid } from 'nanoid'
 
 function Questions(props) {
 
@@ -8,49 +9,59 @@ function Questions(props) {
         for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
         return o;
     };
-
-    // let random = []
-    // random = shuffle(numbers)
-    //const shuffledAnswers = [allAnswers[random[0]], allAnswers[random[1]], allAnswers[random[2]], allAnswers[random[3]]]
     
     // const questionConverted = JSON.stringify(props.question).replace(/&#039;/g , '\'').replace(/"/g, '').replace(/&quot;/g , '"')
 
     const [questionList, setQuestionList] = React.useState(createNewList())
 
     function createNewList(){
+        const myObject = []
         const myList = []
-        for (let i = 0 ; i < 5 ; i++){
+              
+        for(let i = 0 ; i < 4 ; i++){
             let random = shuffle(numbers)
             const answerList = [props.questions[i].correct_answer, ...props.questions[i].incorrect_answers]
             const shuffledAnswers = [answerList[random[0]], answerList[random[1]], answerList[random[2]], answerList[random[3]]]
-            console.log(shuffledAnswers)
-            myList.push({
-                question: props.questions[i].question,
-                answerOne: answerList[0],
-                answerTwo: answerList[1],
-                answerThree: answerList[2],
-                answerFour:answerList[3],
-                toggled: false
-            })
+            for(let j = 0 ; j < 4 ; j++){
+                myObject.push({
+                    id: nanoid(),
+                    answer: shuffledAnswers[random[j]],
+                    correct: shuffledAnswers[random[j]] === answerList[0] ? true : false 
+                })
+            }
+            myList.push({myObject})
         }
+        myList.push({
+                        
+        })
         return myList
     }
 
+    console.log(props)
+
+
+    function handleClick(event){
+        questionList.map(question => {
+            question
+        })
+        console.log(event.target.id)
+    }
+
+
     const questionElements = questionList.map(question => {
         return(
-        <div>
-            <h1 className='question'>{question.question}</h1>
+        <div key={nanoid()}>
+            <h1 className='question'>{props.questions[props.number - 1].question}</h1>
             <div className='buttons'>   
-                <button>{question.answerOne}</button>
-                <button>{question.answerTwo}</button>
-                <button>{question.answerThree}</button>
-                <button>{question.answerFour}</button>
+                {/* <button onClick={handleClick} id={nanoid()}>{question.answerOne}</button>
+                <button onClick={handleClick} id={nanoid()} >{question.answerTwo}</button>
+                <button onClick={handleClick} id={nanoid()}>{question.answerThree}</button>
+                <button onClick={handleClick} id={nanoid()} >{question.answerFour}</button> */}
             </div>
             <hr className='ruler'/> 
         </div>
         )
     })
-
     return (
         <div>
             {questionElements}
