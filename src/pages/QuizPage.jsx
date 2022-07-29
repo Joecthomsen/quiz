@@ -18,15 +18,18 @@ function QuizPage() {
         
     },[])
 
+    let count = 0
+
     React.useEffect(() => {
         if(allQuestions.length > 0){
             setQuestion(createList)
         }
-    }, [allQuestions])
+    }, [allQuestions, !count])
         
     function createList(){
         let obj = []
         let theList =  []
+        console.log("createList() executed...")
         for(let i = 0 ; i < 5 ; i++){
             const questionConverted = JSON.stringify(allQuestions[i].question).replace(/&#039;/g , '\'').replace(/"/g, '').replace(/&quot;/g , '"')
             const questionList = [allQuestions[i].correct_answer, ...allQuestions[i].incorrect_answers]
@@ -45,24 +48,42 @@ function QuizPage() {
         return theList
     }
 
+
     function questionComponent(questionNumber){
         return(
             <div>
                 <h1 className='question'>{question[questionNumber].obj[0].question}</h1>
                 <div className='buttons'>
-                    <button>{question[questionNumber].obj[0].answer}</button>
-                    <button>{question[questionNumber].obj[1].answer}</button>
-                    <button>{question[questionNumber].obj[2].answer}</button>
-                    <button>{question[questionNumber].obj[3].answer}</button>
+                    <button id={question[questionNumber].obj[0].id} onClick={toggle} >{question[questionNumber].obj[0].answer}</button>
+                    <button id={question[questionNumber].obj[1].id} onClick={toggle} >{question[questionNumber].obj[1].answer}</button>
+                    <button id={question[questionNumber].obj[2].id} onClick={toggle} >{question[questionNumber].obj[2].answer}</button>
+                    <button id={question[questionNumber].obj[3].id} onClick={toggle} >{question[questionNumber].obj[3].answer}</button>
                 </div>
                 <hr className='ruler'/>
             </div>
         )
     }
 
-    if(question.length > 0){
-        console.log(question[0])
+    console.log(question)
+
+    function toggle(event){
+      
+        setQuestion(prevState => {
+            prevState.map(x => {
+                x.obj.map(y => {
+                    //console.log(y)
+                    y.id === event.target.id ? console.log(y.answer) : ""
+                    if(y.id === event.target.id){
+                        y.pressed = !y.pressed
+                    }
+                    
+                })
+            })
+            return prevState
+        })   
     }
+
+    console.log(question)
 
     return (
         <div>
