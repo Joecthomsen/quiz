@@ -115,12 +115,14 @@ function QuizPage() {
 
     //const [questions, setQuestions] = allQuestions ? React.useState(createNewList()) : React.useState([])
 
+    let counter = 0
+
 
     React.useEffect(() => {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
         .then((response) => response.json())
         .then(data => { setAllQuestions(data.results)})
-    },[])
+    },[counter])
 
     React.useEffect(() => {
         console.log("executed")
@@ -158,20 +160,35 @@ function QuizPage() {
 
     
     function toggle(event){
-        setButtons(prevState => {
-            return prevState.map(button => {
-                return button.id == event.target.id ? {...button, pressed: !button.pressed} : button
-            }
-            )
-        })
+        if(!buttons[0].reveal){
+            setButtons(prevState => {
+                return prevState.map(button => {
+                    return button.id == event.target.id ? {...button, pressed: !button.pressed} : button
+                }
+                )
+            })
+        }
+    }
+
+    function getNewQuestions(){
+        counter += 1
+        console.log(counter)
+        fetch('https://opentdb.com/api.php?amount=5&type=multiple')
+        .then((response) => response.json())
+        .then(data => { setAllQuestions(data.results)})
     }
 
     function checkAnswers(){
-        setButtons(prevState => {
-            return prevState.map(button => {
-                return {...button, reveal: !button.reveal}
+        if(!buttons[0].reveal){
+            setButtons(prevState => {
+                return prevState.map(button => {
+                    return {...button, reveal: !button.reveal}
+                })
             })
-        })
+        }
+        else{
+            getNewQuestions()
+        }
     }
 
     console.log(buttons)
@@ -191,7 +208,7 @@ function QuizPage() {
             <Question question={allQuestions[2]} buttons={buttonsQuestionThree} handleClick={toggle}/> 
             <Question question={allQuestions[3]} buttons={buttonsQuestionFour} handleClick={toggle}/> 
             <Question question={allQuestions[4]} buttons={buttonsQuestionFive} handleClick={toggle}/>
-            <button onClick={checkAnswers} className='submitButton'>Submit!</button> 
+            <button onClick={checkAnswers} className='submitButton'>{!buttons[0].reveal ? "Submit!" : "Get new questions!"}</button> 
         </div>
     )
 }
