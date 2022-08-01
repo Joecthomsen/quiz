@@ -2,10 +2,10 @@ import React from 'react';
 //import Button from './Button';
 import Button from './Button';
 function Question(props) {
-    //console.log(props)
 
-    const questionConverted = JSON.stringify(props.question.question).replace(/&#039;/g , '\'').replace(/"/g, '').replace(/&quot;/g , '"')
-
+    const questionConverted = JSON.stringify(props.question.question)
+    .replace(/&#039;/g , '\'').replace(/"/g, '')
+    .replace(/&quot;/g , '"').replace(/&amp;/g, '&')
 
     return (
              <div>

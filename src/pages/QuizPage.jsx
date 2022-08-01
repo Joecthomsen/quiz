@@ -134,7 +134,8 @@ function QuizPage() {
                                 id: nanoid(),
                                 pressed: false,
                                 text: allQuestions[i].correct_answer,
-                                isCorrect: true
+                                isCorrect: true,
+                                reveal: false
                             }
                         )
                     }
@@ -144,7 +145,8 @@ function QuizPage() {
                                 id: nanoid(),
                                 pressed: false,
                                 text: allQuestions[i].incorrect_answers[j-1],
-                                isCorrect: false
+                                isCorrect: false,
+                                reveal: false
                             }
                         )
                     }
@@ -157,20 +159,23 @@ function QuizPage() {
     
     function toggle(event){
         setButtons(prevState => {
-            return prevState.map(button => { ///button.id === event.target.id ? console.log(button) : console.log("meh")
+            return prevState.map(button => {
                 return button.id == event.target.id ? {...button, pressed: !button.pressed} : button
             }
             )
         })
-        
-        // buttonsQuestionFive = []
-        // buttonsQuestionFour = []
-        // buttonsQuestionThree = []
-        // buttonsQuestionTwo = []
-        // buttonsQuestionOne = []
+    }
+
+    function checkAnswers(){
+        setButtons(prevState => {
+            return prevState.map(button => {
+                return {...button, reveal: !button.reveal}
+            })
+        })
     }
 
     console.log(buttons)
+
 
     let buttonsQuestionOne = buttons.slice(0,4)
     let buttonsQuestionTwo = buttons.slice(4,8)
@@ -178,27 +183,15 @@ function QuizPage() {
     let buttonsQuestionFour = buttons.slice(12,16)
     let buttonsQuestionFive = buttons.slice(16,20)
 
-    // let buttonsQuestionOne =  [] //buttons.slice(0,4)
-    // let buttonsQuestionTwo = [] //buttons.slice(4,8)
-    // let buttonsQuestionThree = [] //buttons.slice(8,12)
-    // let buttonsQuestionFour = [] // buttons.slice(12,16)
-    // let buttonsQuestionFive = [] //buttons.slice(16,20)
-
-    // buttonsQuestionOne.push(buttons.slice(0.4))
-    // buttonsQuestionTwo.push(buttons.slice(4,8))
-    // buttonsQuestionThree.push(buttons.slice(8,12))
-    // buttonsQuestionFour.push(buttons.slice(12,16))
-    // buttonsQuestionFive.push(buttons.slice(16,20))
-
-
     return(
         buttons.length > 0 &&
-        <div>  
+        <div className='quizPage'>  
             <Question question={allQuestions[0]} buttons={buttonsQuestionOne} handleClick={toggle}/> 
             <Question question={allQuestions[1]} buttons={buttonsQuestionTwo} handleClick={toggle}/> 
             <Question question={allQuestions[2]} buttons={buttonsQuestionThree} handleClick={toggle}/> 
             <Question question={allQuestions[3]} buttons={buttonsQuestionFour} handleClick={toggle}/> 
-            <Question question={allQuestions[4]} buttons={buttonsQuestionFive} handleClick={toggle}/> 
+            <Question question={allQuestions[4]} buttons={buttonsQuestionFive} handleClick={toggle}/>
+            <button onClick={checkAnswers} className='submitButton'>Submit!</button> 
         </div>
     )
 }
