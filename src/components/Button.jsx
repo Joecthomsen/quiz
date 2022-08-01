@@ -2,13 +2,15 @@ import React from "react";
 
 function Button(props) {
 
+    //console.log(props)
+
     const styles = {
-        backgroundColor: props.toggled ? "blue" : "white"
+        backgroundColor: props.buttonObject.pressed ? "blue" : "white"
     }
 
-    //console.log(props.toggled)
-
-    return  (<button id={props.id} onClick={() => {props.handleClick(props.id)}} style={styles}>{props.answer}</button> ); // (<button onClick={() => {props.handleClick(props.id)}}>{props.answer}</button> );
+    return  (
+        <button id={props.buttonObject.id} onClick={props.handleClick} style={styles}>{props.buttonObject.text}</button> 
+    );
 }
 
 export default Button;
