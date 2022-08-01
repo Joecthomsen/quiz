@@ -115,7 +115,6 @@ function QuizPage() {
 
     //const [questions, setQuestions] = allQuestions ? React.useState(createNewList()) : React.useState([])
 
-    // const questionConverted = JSON.stringify(props.question).replace(/&#039;/g , '\'').replace(/"/g, '').replace(/&quot;/g , '"')
 
     React.useEffect(() => {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
