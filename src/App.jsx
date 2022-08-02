@@ -5,7 +5,7 @@ import './style.css'
 
 function App() {
 
-  const [showStartPage, setShowStartPage] = React.useState(false)
+  const [showStartPage, setShowStartPage] = React.useState(true)
 
   function handleChange(){
     setShowStartPage(prevState => !prevState)

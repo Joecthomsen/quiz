@@ -81,6 +81,7 @@ body{
     align-items: center;
     justify-content: space-around;
     margin-top: 0.3rem;
+    box-shadow: none;
 }
 
 .buttons > button{
@@ -91,6 +92,7 @@ body{
     color: #293263;
     min-width: 100px;
     margin: 5px;
+    box-shadow: none;
 }
 
 .question{
@@ -129,10 +131,18 @@ body{
     font-family: 'Roboto', sans-serif;
     font-size: large;
     font-weight: bold;
+    color: white;
     width: 20rem;
     height: 3rem;
-    background-color: #f5f7fd;
+    background-color: #4c5a9e;
     border-width: 2px;
     border-color: #4d5b9e;
-    border-radius: 8px;
+    border-radius: 12px;
+}
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40%;
 }

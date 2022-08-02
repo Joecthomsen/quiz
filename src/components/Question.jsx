@@ -7,14 +7,16 @@ function Question(props) {
     .replace(/&#039;/g , '\'').replace(/"/g, '')
     .replace(/&quot;/g , '"').replace(/&amp;/g, '&')
 
+    console.log(props)
+  
     return (
              <div>
                  <h1 className='question'>{questionConverted}</h1>
                  <div className='buttons'>
-                    <Button buttonObject={props.buttons[0]} handleClick={props.handleClick}/>
-                    <Button buttonObject={props.buttons[1]} handleClick={props.handleClick}/>
-                    <Button buttonObject={props.buttons[2]} handleClick={props.handleClick}/>
-                    <Button buttonObject={props.buttons[3]} handleClick={props.handleClick}/>
+                    <Button buttonObject={props.buttons[props.buttons[0].randomNumber]} handleClick={props.handleClick}/>
+                    <Button buttonObject={props.buttons[props.buttons[1].randomNumber]} handleClick={props.handleClick}/>
+                    <Button buttonObject={props.buttons[props.buttons[2].randomNumber]} handleClick={props.handleClick}/>
+                    <Button buttonObject={props.buttons[props.buttons[3].randomNumber]} handleClick={props.handleClick}/>
                  </div>
                  <hr className='ruler'/>
              </div>

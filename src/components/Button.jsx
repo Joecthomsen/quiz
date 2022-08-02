@@ -18,7 +18,8 @@ function Button(props) {
         styles = {backgroundColor: "yellow"}
     }
     else if(props.buttonObject.pressed){
-        styles = {backgroundColor: "blue"}
+        styles = {backgroundColor: "#d6dbf2",
+                  borderColor: "#d6dbf2"}
     }
     else{
         styles = {backgroundColor: "white"}

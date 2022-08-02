@@ -1,119 +1,12 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { nanoid } from 'nanoid'
 import Question from '../components/Question';
-import { Divider } from 'semantic-ui-react';
+import { ThreeDots } from  'react-loader-spinner'
 
 function QuizPage() {
 
     const [allQuestions, setAllQuestions] = React.useState([])
-    const [buttons, setButtons] = React.useState(
-        [
-            // {
-            //     id: 0,
-            //     text: "",
-            //     pressed: false,
-            //     isCorrect: false
-            // },
-            // {
-            //     id: 1,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 2,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 3,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 4,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 5,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 6,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 7,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 8,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 9,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 10,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 11,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 12,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 13,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 14,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 15,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 16,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 17,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 18,
-            //     text: "",
-            //     pressed: false
-            // },
-            // {
-            //     id: 19,
-            //     text: "",
-            //     pressed: false
-            // }
-        ]
-    )
-
-    //const [questions, setQuestions] = allQuestions ? React.useState(createNewList()) : React.useState([])
+    const [buttons, setButtons] = React.useState([])
 
     let counter = 0
 
@@ -122,12 +15,21 @@ function QuizPage() {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
         .then((response) => response.json())
         .then(data => { setAllQuestions(data.results)})
-    },[counter])
+          
+        
+    },[])
 
     React.useEffect(() => {
-        console.log("executed")
         if(allQuestions.length > 0){
             var arr = []
+            var numbers = [0, 1, 2, 3];
+
+            function shuffle(o) {
+                for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+                return o;
+            };
+            const randomNumbers = shuffle(numbers)
+        
             for(let i = 0 ; i < 5 ; i++){
                 for(let j = 0 ; j < 4 ; j++){
                     if(j === 0){
@@ -137,7 +39,8 @@ function QuizPage() {
                                 pressed: false,
                                 text: allQuestions[i].correct_answer,
                                 isCorrect: true,
-                                reveal: false
+                                reveal: false,
+                                randomNumber: randomNumbers[j]
                             }
                         )
                     }
@@ -148,7 +51,8 @@ function QuizPage() {
                                 pressed: false,
                                 text: allQuestions[i].incorrect_answers[j-1],
                                 isCorrect: false,
-                                reveal: false
+                                reveal: false,
+                                randomNumber: randomNumbers[j]
                             }
                         )
                     }
@@ -191,9 +95,6 @@ function QuizPage() {
         }
     }
 
-    console.log(buttons)
-
-
     let buttonsQuestionOne = buttons.slice(0,4)
     let buttonsQuestionTwo = buttons.slice(4,8)
     let buttonsQuestionThree = buttons.slice(8,12)
@@ -201,14 +102,18 @@ function QuizPage() {
     let buttonsQuestionFive = buttons.slice(16,20)
 
     return(
-        buttons.length > 0 &&
+        buttons.length > 0 ?
         <div className='quizPage'>  
             <Question question={allQuestions[0]} buttons={buttonsQuestionOne} handleClick={toggle}/> 
             <Question question={allQuestions[1]} buttons={buttonsQuestionTwo} handleClick={toggle}/> 
             <Question question={allQuestions[2]} buttons={buttonsQuestionThree} handleClick={toggle}/> 
             <Question question={allQuestions[3]} buttons={buttonsQuestionFour} handleClick={toggle}/> 
             <Question question={allQuestions[4]} buttons={buttonsQuestionFive} handleClick={toggle}/>
-            <button onClick={checkAnswers} className='submitButton'>{!buttons[0].reveal ? "Submit!" : "Get new questions!"}</button> 
+            <button onClick={checkAnswers} className='submitButton'>{!buttons[0].reveal ? "Check answers!" : "Try again"}</button> 
+        </div>
+        :
+        <div className='loading'>
+            <ThreeDots color="#00BFFF" height={80} width={80} />
         </div>
     )
 }
