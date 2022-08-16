@@ -2,9 +2,10 @@ import React from "react";
 
 function Button(props) {
 
-    // const styles = {
-    //     backgroundColor: props.buttonObject.pressed ? "blue" : "white"
-    // }
+    const answerConverted = JSON.stringify(props.buttonObject.text)
+    .replace(/&#039;/g , '\'').replace(/"/g, '')
+    .replace(/&quot;/g , '"').replace(/&amp;/g, '&')
+    .replace(/&eacute;/g, 'é')
 
     let styles = {}
 
@@ -27,7 +28,7 @@ function Button(props) {
 
     return  (
         <div className='buttons'>
-            <button id={props.buttonObject.id} onClick={props.handleClick} style={styles}>{props.buttonObject.text}</button> 
+            <button id={props.buttonObject.id} onClick={props.handleClick} style={styles}>{answerConverted}</button> 
         </div>
     );
 }

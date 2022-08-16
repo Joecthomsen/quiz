@@ -1,16 +1,15 @@
 import React from 'react';
-//import Button from './Button';
 import Button from './Button';
 function Question(props) {
 
     const questionConverted = JSON.stringify(props.question.question)
     .replace(/&#039;/g , '\'').replace(/"/g, '')
     .replace(/&quot;/g , '"').replace(/&amp;/g, '&')
+    .replace(/&eacute;/g, 'é')
 
-    console.log(props)
-  
+
     return (
-             <div>
+             <div className='the-question' >
                  <h1 className='question'>{questionConverted}</h1>
                  <div className='buttons'>
                     <Button buttonObject={props.buttons[props.buttons[0].randomNumber]} handleClick={props.handleClick}/>
@@ -22,5 +21,4 @@ function Question(props) {
              </div>
         )
     }
-
 export default Question;

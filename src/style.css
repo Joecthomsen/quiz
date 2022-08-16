@@ -96,6 +96,7 @@ body{
 }
 
 .question{
+    z-index: 10;
     margin: 1%;
     color: #293263;
     margin-top: 1rem;
@@ -103,31 +104,22 @@ body{
 }
 
 .ruler{
+    z-index: 10;
     color: #293263;
     height: 1px;
     width: 90%;
     margin: 1.5rem 
 }
 
-.quizPage > button:hover{
-    background: #c0caff;
-}
-
-.but:hover{
-    background: #c0caff;
-}
-
-.buttons > button:hover{
-    background: #c0caff;
-}
-
 .quizPage{
+    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .quizPage > button{
+    z-index: 10;
     font-family: 'Roboto', sans-serif;
     font-size: large;
     font-weight: bold;
@@ -145,4 +137,12 @@ body{
     justify-content: center;
     align-items: center;
     margin-top: 40%;
+}
+
+.buttons{
+    z-index: 10;
+}
+
+.the-question{
+    z-index: 10;
 }

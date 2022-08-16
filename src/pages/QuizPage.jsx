@@ -12,7 +12,7 @@ function QuizPage() {
 
 
     React.useEffect(() => {
-        fetch('https://opentdb.com/api.php?amount=5&type=multiple')
+        fetch('https://opentdb.com/api.php?amount=50&difficulty=easy&type=multiple')
         .then((response) => response.json())
         .then(data => { setAllQuestions(data.results)})
           
@@ -28,9 +28,9 @@ function QuizPage() {
                 for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
                 return o;
             };
-            const randomNumbers = shuffle(numbers)
-        
+            
             for(let i = 0 ; i < 5 ; i++){
+                let randomNumbers = shuffle(numbers)
                 for(let j = 0 ; j < 4 ; j++){
                     if(j === 0){
                         arr.push(
@@ -75,8 +75,9 @@ function QuizPage() {
     }
 
     function getNewQuestions(){
-        counter += 1
-        console.log(counter)
+        //counter += 1
+        setAllQuestions([])
+        setButtons([])
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
         .then((response) => response.json())
         .then(data => { setAllQuestions(data.results)})
@@ -104,16 +105,20 @@ function QuizPage() {
     return(
         buttons.length > 0 ?
         <div className='quizPage'>  
-            <Question question={allQuestions[0]} buttons={buttonsQuestionOne} handleClick={toggle}/> 
-            <Question question={allQuestions[1]} buttons={buttonsQuestionTwo} handleClick={toggle}/> 
-            <Question question={allQuestions[2]} buttons={buttonsQuestionThree} handleClick={toggle}/> 
-            <Question question={allQuestions[3]} buttons={buttonsQuestionFour} handleClick={toggle}/> 
-            <Question question={allQuestions[4]} buttons={buttonsQuestionFive} handleClick={toggle}/>
-            <button onClick={checkAnswers} className='submitButton'>{!buttons[0].reveal ? "Check answers!" : "Try again"}</button> 
+            <div className="blob-up"/>
+                <Question question={allQuestions[0]} buttons={buttonsQuestionOne} handleClick={toggle}/> 
+                <Question question={allQuestions[1]} buttons={buttonsQuestionTwo} handleClick={toggle}/> 
+                <Question question={allQuestions[2]} buttons={buttonsQuestionThree} handleClick={toggle}/> 
+                <Question question={allQuestions[3]} buttons={buttonsQuestionFour} handleClick={toggle}/> 
+                <Question question={allQuestions[4]} buttons={buttonsQuestionFive} handleClick={toggle}/>
+                <button onClick={checkAnswers} className='submitButton'>{!buttons[0].reveal ? "Check answers!" : "Try again"}</button> 
+            <div className="blob-down"/>
         </div>
         :
         <div className='loading'>
-            <ThreeDots color="#00BFFF" height={80} width={80} />
+            <div className="blob-up"/>
+                <ThreeDots color="#00BFFF" height={80} width={80} />
+            <div className="blob-down"/>
         </div>
     )
 }
